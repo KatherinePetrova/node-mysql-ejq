@@ -30,7 +30,7 @@ class Queries{
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s
                 } else {return ""}
-            };)()
+            })()
             try{
                 result = this.con.query(sql);
             } catch(e) {
@@ -48,7 +48,7 @@ class Queries{
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s;
                 } else {return ""}
-            };)()
+            })()
             try{
                 result = this.con.query(sql);
             } catch(e) {
