@@ -11,7 +11,7 @@ class Queries{
         
         var result;
         
-        if(data.keys){
+        if(typeof data.keys !== 'undefined'){
             var counter = true;
             var keys = "";
             for(var i=0;i<data.keys.length;i++){
@@ -23,7 +23,7 @@ class Queries{
                 }
             }            
             var sql = "SELECT (" + keys + ") FROM " + data.table + function(){
-                if(data.where){
+                if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value == 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
@@ -41,7 +41,7 @@ class Queries{
             
         } else {
             var sql = "SELECT * FROM " + data.table + function(){
-                if(data.where){
+                if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value == 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
@@ -108,7 +108,7 @@ class Queries{
         }
         
         var sql = "UPDATE " + data.table + " SET " + values + function(){
-                if(data.where){
+                if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value == 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
