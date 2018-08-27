@@ -1,9 +1,8 @@
 {
-  name: "node-mysql-ejq",
-  version: "1.0.0",
-  repository: {
-    type: "git",
-    url: "https://github.com/KatherinePetrova/node-mysql-ejq.git"
-  },
-  "keywords": ["node", "mysql", "queries"],
-},
+  "name": "node-mysql-ejq",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KatherinePetrova/node-mysql-ejq.git"
+  }
+}
