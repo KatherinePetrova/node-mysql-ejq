@@ -40,6 +40,10 @@ class Queries{
                     var s = " WHERE " + values;
                     return s
                 } else {return ""}
+            })() + (function(){
+                if(typeof data.orderby !== 'undefined'){
+                    var s = " ORDER BY " + data.orderby;
+                } else {return ""}
             })();
             try{
                 result = this.con.query(sql);
@@ -67,6 +71,10 @@ class Queries{
                     }
                     var s = " WHERE " + values;
                     return s
+                } else {return ""}
+            })() + (function(){
+                if(typeof data.orderby !== 'undefined'){
+                    var s = " ORDER BY " + data.orderby;
                 } else {return ""}
             })();
             try{
@@ -185,6 +193,10 @@ class Queries{
         }
         
         return result
+    }
+    
+    join(data){
+        
     }
     
 }
