@@ -24,7 +24,7 @@ class Queries{
             }            
             var sql = "SELECT (" + keys + ") FROM " + data.table + function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value == 'string'){
+                    if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
@@ -42,7 +42,7 @@ class Queries{
         } else {
             var sql = "SELECT * FROM " + data.table + function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value == 'string'){
+                    if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
@@ -66,7 +66,7 @@ class Queries{
         var keys;
         var values;
         for(var key in data.data){
-            if(typeof data.data[key] == 'string'){
+            if(typeof data.data[key] === 'string'){
                 data.data[key] = "'" + data.data[key] + "'";
             }
             if(counter){
@@ -96,7 +96,7 @@ class Queries{
         var values;
         
         for(var key in data.data){
-            if(typeof data.data[key] == 'string'){
+            if(typeof data.data[key] === 'string'){
                 data.data[key] = "'" + data.data[key] + "'";
             }
             if(counter){
@@ -109,7 +109,7 @@ class Queries{
         
         var sql = "UPDATE " + data.table + " SET " + values + function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value == 'string'){
+                    if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
@@ -126,7 +126,7 @@ class Queries{
     }
     delete(data){
         var result;
-        if(typeof data.where.value = 'string'){
+        if(typeof data.where.value === 'string'){
             data.where.value = "'" + data.where.value + "'"
         }
         var sql = "DELETE FROM " + data.table + "WHERE " + data.where.cond + "=" + data.where.value;
