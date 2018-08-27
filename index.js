@@ -43,6 +43,7 @@ class Queries{
             })() + (function(){
                 if(typeof data.orderby !== 'undefined'){
                     var s = " ORDER BY " + data.orderby;
+                    return s
                 } else {return ""}
             })();
             try{
@@ -75,6 +76,7 @@ class Queries{
             })() + (function(){
                 if(typeof data.orderby !== 'undefined'){
                     var s = " ORDER BY " + data.orderby;
+                    return s
                 } else {return ""}
             })();
             try{
