@@ -24,13 +24,23 @@ class Queries{
             }            
             var sql = "SELECT (" + keys + ") FROM " + data.table + (function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value === 'string'){
-                        data.where.value = "'" + data.where.value + "'";
+                    var values;
+                    var counter = true;
+                    for(var key in data.where){
+                        if(typeof data.where[key] === 'string'){
+                            data.where[key] = "'" + data.where[key] + "'";
+                        }
+                        if(counter){
+                            values = key + "=" + data.where[key];
+                            counter = false;
+                        } else {
+                            values = values + " AND " + key + "=" + data.where[key];
+                        }
                     }
-                    var s = " WHERE " + data.where.cond + "=" + data.where.value;
+                    var s = " WHERE " + values;
                     return s
                 } else {return ""}
-            })()
+            })();
             try{
                 result = this.con.query(sql);
             } catch(e) {
@@ -42,13 +52,23 @@ class Queries{
         } else {
             var sql = "SELECT * FROM " + data.table + (function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value === 'string'){
-                        data.where.value = "'" + data.where.value + "'";
+                    var values;
+                    var counter = true;
+                    for(var key in data.where){
+                        if(typeof data.where[key] === 'string'){
+                            data.where[key] = "'" + data.where[key] + "'";
+                        }
+                        if(counter){
+                            values = key + "=" + data.where[key];
+                            counter = false;
+                        } else {
+                            values = values + " AND " + key + "=" + data.where[key];
+                        }
                     }
-                    var s = " WHERE " + data.where.cond + "=" + data.where.value;
-                    return s;
+                    var s = " WHERE " + values;
+                    return s
                 } else {return ""}
-            })()
+            })();
             try{
                 result = this.con.query(sql);
             } catch(e) {
@@ -109,13 +129,23 @@ class Queries{
         
         var sql = "UPDATE " + data.table + " SET " + values + (function(){
                 if(typeof data.where !== 'undefined'){
-                    if(typeof data.where.value === 'string'){
-                        data.where.value = "'" + data.where.value + "'";
+                    var values;
+                    var counter = true;
+                    for(var key in data.where){
+                        if(typeof data.where[key] === 'string'){
+                            data.where[key] = "'" + data.where[key] + "'";
+                        }
+                        if(counter){
+                            values = key + "=" + data.where[key];
+                            counter = false;
+                        } else {
+                            values = values + " AND " + key + "=" + data.where[key];
+                        }
                     }
-                    var s = " WHERE " + data.where.cond + "=" + data.where.value;
+                    var s = " WHERE " + values;
                     return s
                 } else {return ""}
-            })()
+            })();
         try{
             result = this.con.query(sql);
         } catch(e){
@@ -129,7 +159,25 @@ class Queries{
         if(typeof data.where.value === 'string'){
             data.where.value = "'" + data.where.value + "'"
         }
-        var sql = "DELETE FROM " + data.table + "WHERE " + data.where.cond + "=" + data.where.value;
+        var sql = "DELETE FROM " + data.table + (function(){
+                if(typeof data.where !== 'undefined'){
+                    var values;
+                    var counter = true;
+                    for(var key in data.where){
+                        if(typeof data.where[key] === 'string'){
+                            data.where[key] = "'" + data.where[key] + "'";
+                        }
+                        if(counter){
+                            values = key + "=" + data.where[key];
+                            counter = false;
+                        } else {
+                            values = values + " AND " + key + "=" + data.where[key];
+                        }
+                    }
+                    var s = " WHERE " + values;
+                    return s
+                } else {return ""}
+            })();
         try{
             result = this.con.query(sql);
         } catch(e){
