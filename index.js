@@ -45,7 +45,7 @@ class Queries{
                     if(typeof data.where.value == 'string'){
                         data.where.value = "'" + data.where.value + "'";
                     }
-                    var s = " WHERE " data.where.cond + "=" + data.where.value;
+                    var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s;
                 } else {return ""}
             };
