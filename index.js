@@ -57,7 +57,7 @@ class Queries{
                 } else {return ""}
             })() + (function(){
                 if(typeof data.join !== 'undefined'){
-                    var s;
+                    var s="";
                     for(var i=0; i<data.join.length; i++){
                         s = s + " JOIN " + data.join[i].table + " ON " + data.table + "." + (function(){
                             var keys;
