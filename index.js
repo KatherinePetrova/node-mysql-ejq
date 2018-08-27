@@ -83,6 +83,8 @@ class Queries{
                 throw new Error(e);
             }
             
+            console.log(result.sql);
+            
             return result
             
         } else {
