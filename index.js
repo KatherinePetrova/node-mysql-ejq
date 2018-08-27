@@ -22,7 +22,7 @@ class Queries{
                     keys = keys + ", " + data.keys[i];
                 }
             }            
-            var sql = "SELECT (" + keys + ") FROM " + data.table + function(){
+            var sql = "SELECT (" + keys + ") FROM " + data.table + (function(){
                 if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
@@ -30,7 +30,7 @@ class Queries{
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s
                 } else {return ""}
-            };
+            };)()
             try{
                 result = this.con.query(sql);
             } catch(e) {
@@ -40,7 +40,7 @@ class Queries{
             return result
             
         } else {
-            var sql = "SELECT * FROM " + data.table + function(){
+            var sql = "SELECT * FROM " + data.table + (function(){
                 if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
@@ -48,7 +48,7 @@ class Queries{
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s;
                 } else {return ""}
-            };
+            };)()
             try{
                 result = this.con.query(sql);
             } catch(e) {
@@ -107,7 +107,7 @@ class Queries{
             }
         }
         
-        var sql = "UPDATE " + data.table + " SET " + values + function(){
+        var sql = "UPDATE " + data.table + " SET " + values + (function(){
                 if(typeof data.where !== 'undefined'){
                     if(typeof data.where.value === 'string'){
                         data.where.value = "'" + data.where.value + "'";
@@ -115,7 +115,7 @@ class Queries{
                     var s = " WHERE " + data.where.cond + "=" + data.where.value;
                     return s
                 } else {return ""}
-            };
+            })()
         try{
             result = this.con.query(sql);
         } catch(e){
