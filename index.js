@@ -111,13 +111,31 @@ class Queries{
                     var s = " ORDER BY " + data.orderby;
                     return s
                 } else {return ""}
-            })();
+            })() + (function(){
+                if(typeof data.join !== 'undefined'){
+                    var s;
+                    for(var i=0; i<data.join.length; i++){
+                        s = s + " JOIN " + data.join[i].table + " ON " + data.table + "." + (function(){
+                            var keys;
+                            for(var key in data.join[i].on){
+                                keys = key;
+                            }
+                            return keys
+                        })() + "=" + data.join[i].table + "." + (function(){
+                            var value;
+                            for(var key in data.join[i].on){
+                                value = data.join[i].on[key];
+                            }
+                            return value
+                        })();
             try{
                 result = this.con.query(sql);
             } catch(e) {
                 throw new Error(e);
             }
             
+            console.log(result.sql);
+
             return result            
         }
                 
