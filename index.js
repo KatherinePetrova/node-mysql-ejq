@@ -58,7 +58,7 @@ class Queries{
             })() + (function(){
                 if(typeof data.join !== 'undefined'){
                     var s;
-                    for(var i=0; i<data.join.length){
+                    for(var i=0; i<data.join.length; i++){
                         s = s + " JOIN " + data.join[i].table + " ON " + data.table + "." + (function(){
                             var keys;
                             for(var key in data.join[i].on){
