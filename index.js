@@ -12,17 +12,27 @@ class Queries{
         var result;
         
         if(typeof data.keys !== 'undefined'){
+            
             var counter = true;
             var keys = "";
             for(var i=0;i<data.keys.length;i++){
                 if(counter){
-                    keys = data.keys[i];
+                    keys = data.table + "." + data.keys[i];
                     counter = false
                 } else {
-                    keys = keys + ", " + data.keys[i];
+                    keys = keys + ", " + data.table + "." + data.keys[i];
                 }
-            }            
-            var sql = "SELECT (" + keys + ") FROM " + data.table + (function(){
+            }
+            
+            if(typeof data.join !== 'undefined'){
+                for(var i=0; i<data.join.length; i++){
+                    for(var j=0; j<data.join[i].keys.length; j++){
+                        keys = keys + ", " + data.join[i].table + "." + data.join[i].keys[j];
+                    }
+                }
+            }
+            
+            var sql = "SELECT " + keys + " FROM " + data.table + (function(){
                 if(typeof data.where !== 'undefined'){
                     var values;
                     var counter = true;
@@ -45,7 +55,28 @@ class Queries{
                     var s = " ORDER BY " + data.orderby;
                     return s
                 } else {return ""}
+            })() + (function(){
+                if(typeof data.join !== 'undefined'){
+                    var s;
+                    for(var i=0; i<data.join.length){
+                        s = s + " JOIN " + data.join[i].table + " ON " + data.table + "." + (function(){
+                            var keys;
+                            for(var key in data.join[i].on){
+                                keys = key;
+                            }
+                            return keys
+                        })() + "=" + data.join[i].table + "." + (function(){
+                            var value;
+                            for(var key in data.join[i].on){
+                                value = data.join[i].on[key];
+                            }
+                            return value
+                        })();
+                    }
+                    return s;
+                } else {return ""}
             })();
+            
             try{
                 result = this.con.query(sql);
             } catch(e) {
